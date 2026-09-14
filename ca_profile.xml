@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommunityApplications>
+  <Profile>
+Unraid templates for Crowbarr, audio-grounded subtitle synchronization and transcription for Sonarr, Radarr and Bazarr.
+
+Two templates are provided: Crowbarr for CPU processing and Crowbarr-CUDA for NVIDIA GPUs. Report problems on the Crowbarr GitHub issue tracker.
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/amanofvaly/unraid-templates/main/icon.png</Icon>
+  <WebPage>https://github.com/amanofvaly/crowbarr</WebPage>
+</CommunityApplications>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>Crowbarr-CUDA</Name>
+  <Repository>ghcr.io/amanofvaly/crowbarr:latest-cuda</Repository>
+  <Registry>https://github.com/amanofvaly/crowbarr/pkgs/container/crowbarr</Registry>
+  <Network>bridge</Network>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/amanofvaly/crowbarr/issues</Support>
+  <Project>https://github.com/amanofvaly/crowbarr</Project>
+  <ReadMe>https://github.com/amanofvaly/crowbarr/blob/main/docs/unraid.md</ReadMe>
+  <Overview>Audio-grounded subtitle synchronization and transcription for Sonarr, Radarr and Bazarr.
+
+Crowbarr watches your Sonarr and Radarr libraries and keeps subtitles in sync with the dialogue. It waits for Bazarr to find a subtitle, checks its timing against the audio with Whisper, and corrects it only when the audio says it is wrong. When no subtitle turns up, it transcribes one. Results are written as a new .crowbarr.en.srt file next to the video. Existing media and subtitles are never modified.
+
+This template uses an NVIDIA GPU for speech recognition. Install the Nvidia Driver plugin first, then select CUDA under Settings after the first start. Without a GPU, install Crowbarr instead.
+
+Setup: map /tv and /movies to the same shares Sonarr and Radarr use. The container runs as nobody:users (99:100), so those shares must be writable by that account. Open the WebUI, create your account, then add Sonarr, Radarr and Plex under Settings. Speech models download into appdata on first use.</Overview>
+  <Category>MediaApp:Video</Category>
+  <WebUI>http://[IP]:[PORT:8449]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/amanofvaly/unraid-templates/main/templates/crowbarr-cuda.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/amanofvaly/unraid-templates/main/icon.png</Icon>
+  <ExtraSearchTerms>nvidia gpu subtitles subsync whisper sonarr radarr bazarr srt</ExtraSearchTerms>
+  <Requires>Nvidia Driver plugin and a CUDA-capable NVIDIA GPU. Sonarr or Radarr. Outbound internet access on first run to download speech models.</Requires>
+  <ExtraParams>--runtime=nvidia --user 99:100 --init --stop-timeout 45 --security-opt no-new-privileges:true --cap-drop ALL</ExtraParams>
+  <License>MIT</License>
+  <MinVer>6.10</MinVer>
+  <Date>2026-09-14</Date>
+  <Changes>### 2026-09-14
+- Initial template.</Changes>
+  <Config Name="WebUI" Target="8449" Default="8449" Mode="tcp" Description="Dashboard port." Type="Port" Display="always" Required="true" Mask="false"/>
+  <Config Name="Appdata" Target="/config" Default="/mnt/user/appdata/crowbarr" Mode="rw" Description="Database, settings, speech models and cached transcripts." Type="Path" Display="advanced" Required="true" Mask="false"/>
+  <Config Name="Path: /tv" Target="/tv" Default="" Mode="rw" Description="Your TV library. Use the same share Sonarr uses so no path mapping is needed." Type="Path" Display="always" Required="false" Mask="false"/>
+  <Config Name="Path: /movies" Target="/movies" Default="" Mode="rw" Description="Your movie library. Use the same share Radarr uses so no path mapping is needed." Type="Path" Display="always" Required="false" Mask="false"/>
+  <Config Name="Path: /data" Target="/data" Default="" Mode="rw" Description="Optional single data share for setups that map /data into Sonarr and Radarr instead of /tv and /movies." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="all" Description="GPU UUID from the Nvidia Driver plugin page, or all." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="NVIDIA_DRIVER_CAPABILITIES" Target="NVIDIA_DRIVER_CAPABILITIES" Default="compute,utility" Description="Driver capabilities passed to the container." Type="Variable" Display="advanced" Required="true" Mask="false"/>
+</Container>
