@@ -33,6 +33,7 @@ Setup: map /tv and /movies to the same shares Sonarr and Radarr use. The contain
   <Config Name="Path: /tv" Target="/tv" Default="" Mode="rw" Description="Your TV library. Use the same share Sonarr uses so no path mapping is needed." Type="Path" Display="always" Required="false" Mask="false"/>
   <Config Name="Path: /movies" Target="/movies" Default="" Mode="rw" Description="Your movie library. Use the same share Radarr uses so no path mapping is needed." Type="Path" Display="always" Required="false" Mask="false"/>
   <Config Name="Path: /data" Target="/data" Default="" Mode="rw" Description="Optional single data share for setups that map /data into Sonarr and Radarr instead of /tv and /movies." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="URL Base" Target="URL_BASE" Default="" Description="Subfolder for a reverse proxy, such as /crowbarr. Leave empty to serve at the root." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="all" Description="GPU UUID from the Nvidia Driver plugin page, or all." Type="Variable" Display="always" Required="true" Mask="false"/>
   <Config Name="NVIDIA_DRIVER_CAPABILITIES" Target="NVIDIA_DRIVER_CAPABILITIES" Default="compute,utility" Description="Driver capabilities passed to the container." Type="Variable" Display="advanced" Required="true" Mask="false"/>
 </Container>
